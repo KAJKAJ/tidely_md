@@ -1,0 +1,33 @@
+<div ng-controller="LoginCtrl" layout="column" layout-fill>
+  <md-toolbar class="green-color-1">
+    <div layout="row" class="md-toolbar-tools">
+      <a ui-sref="intro"><i class="fa fa-2x fa-angle-left"></i></a>
+      <h3><b style="font-size:90%;">이메일 가입</b></h3>
+    </div>
+  </md-toolbar>
+  <div layout="column">
+    <form style="padding: 20px;" md-theme="green" name="signupForm" ng-submit="signup(signupForm)" novalidate>
+      <md-text-float type='email' label="이메일" ng-model="signupUser.email" ng-required="true"> </md-text-float>
+      <p class="error-sm" ng-show="signupForm.email.$error.email">
+        유효한 이메일 주소가 아닙니다.
+      </p>
+      <md-text-float type='password' label="비밀번호" ng-model="signupUser.password" ng-required="true"> </md-text-float>
+      <p class="error-sm" ng-show="signupErrors">{{signupErrors}}</p>   
+      <md-button class="md-primary md-raised" md-theme="green" type="submit" ng-disabled="signupForm.$invalid">가입하기</md-button>
+      <div ng-show="inProgress" layout="row" layout-sm="column" layout-align="space-around center">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+      </div>
+    </form>
+    <div style="padding: 20px;">
+      <label style="font-size:80%;">가입하시면 약관에 동의하신 것으로 간주합니다.<br/>
+      <a style="text-decoration:none;" ui-sref="term"><b>약관 보기</b></a>
+      </label>
+    </div>
+
+  </div>
+</div>
+    
+		
+</div>
+
+

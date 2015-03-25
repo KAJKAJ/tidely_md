@@ -1,0 +1,13 @@
+org.apache.cordova.camera
+
+org.apache.cordova.console
+
+org.apache.cordova.file
+
+org.apache.cordova.file-transfer
+
+org.apache.cordova.inappbrowser
+
+org.apache.cordova.splashscreen
+
+org.apache.cordova.device

@@ -1,0 +1,46 @@
+<div ng-include="'templates/sidemenu_left.html'" ng-controller="SideMenuLeftCtrl"></div>
+<md-toolbar class="toolbar green-color-1">
+  <h3 class="md-toolbar-tools">
+    <span><i class="fa fa-align-justify" ng-click="openLeftMenu()"></i> 프로필</span>
+  </h3>
+</md-toolbar>
+
+<md-content class="toolbar-padding">
+  <md-card>
+    <img ng-src="{{hostUrl + memorial.file.url}}" class="img-center"></img>
+    <h2> {{memorial.name}} </h2>
+    <md-list>
+      <md-item>
+        <md-item-content>
+          <div class="md-tile-left">
+              <i class="fa fa-2x fa-calendar"></i>
+          </div>
+          <div class="md-tile-content">
+            <h3>이야기 시작하는 날</h3>
+            <h4>{{memorial.dateOfBirth}} </h4>
+          </div>
+        </md-item-content>
+        <md-item-content>
+          <div class="md-tile-left">
+              <i class="fa fa-2x fa-calendar-o"></i>
+          </div>
+          <div class="md-tile-content">
+            <h3>이야기 끝나는 날</h3>
+            <h3>{{memorial.dateOfDeath}}</h3>
+          </div>
+        </md-item-content>
+        <md-item-content>
+          <div class="md-tile-left">
+              <i class="fa fa-2x fa-pencil-square-o"></i>
+          </div>
+          <div class="md-tile-content">
+            <h3>{{memorial.description}}</h3>
+          </div>
+        </md-item-content>
+      </md-item>
+    </md-list>
+  </md-card>
+  <div ng-if="!memorial.public&&role.isGuest">
+    <div ng-include="'templates/block.html'"></div>
+  </div>
+</md-content>

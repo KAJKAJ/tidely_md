@@ -1,0 +1,41 @@
+<div ng-include="'templates/sidemenu_left.html'" ng-controller="SideMenuLeftCtrl"></div>
+<md-toolbar class="toolbar green-color-1">
+  <h3 class="md-toolbar-tools">
+    <span><i class="fa fa-align-justify" ng-click="openLeftMenu()"></i> 편지</span>
+    <span flex></span>
+    <md-button>
+      <span class="text-centered full-width" ui-sref="letter_new" ><i class="fa fa-envelope"></i> 쓰기</span>
+    </md-button>
+  </h3>
+</md-toolbar>
+
+<md-content class="toolbar-padding">
+  <div ng-if="memorial.public||!role.isGuest">
+    <md-card ng-repeat="story in storiesArray" ng-click="goToDetail(story)" id="{{story}}">
+      <p>
+      	<!-- {{storiesObject[story].text|limitTo:100}} <span ng-if="storiesObject[story].text.length>100">...</span> -->
+      	{{storiesObject[story].text}}
+      </p>
+      <img ng-src="{{hostUrl + storiesObject[story].file.url}}" class="img-center" ng-if="storiesObject[story].file"/>
+      <div class="author pull-left">
+        <span class="text-muted text-small"><em>{{users[storiesObject[story].ref_user].profile.name}} - {{storiesObject[story].fromNow}}</em></span>
+      </div> 
+      <div class="comment-count pull-right">
+        <i class="fa fa-comment"></i> {{commentSize(story)}}
+      </div>
+      <div class="clear"></div>
+    </md-card>
+  </div>
+  <div ng-if="!memorial.public&&role.isGuest">
+    <div ng-include="'templates/block.html'"></div>
+  </div>
+  <div class="toolbar-padding-bottom"></div>
+</md-content>
+
+<!-- <md-toolbar class="toolbar-bottom green-color-2 toolbar-mini">
+  <h5 class="md-toolbar-tools toolbar-mini">
+    <span class="text-centered full-width" ui-sref="letter_new" ><i class="fa fa-envelope"></i> 편지 쓰기</span>
+  </h5>
+</md-toolbar> -->
+
+

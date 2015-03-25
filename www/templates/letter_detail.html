@@ -1,0 +1,82 @@
+<md-toolbar class="toolbar green-color-1">
+  <h3 class="md-toolbar-tools">
+    <span>
+    	<i class="fa fa-chevron-left" ui-sref="letter.id({id:story.$id})"></i> 
+    	<!-- {{story.text| limitTo:15}} <span ng-if="story.text.length>15">...</span> -->
+			<span> 뒤로</span>
+    </span>
+  </h3>
+</md-toolbar>
+
+<md-content class="toolbar-padding">
+  <div ng-if="memorial.public||!role.isGuest">
+    <md-card>
+    	<!-- author -->
+    	<md-list>
+        <md-item>
+          <md-item-content>
+            <div class="md-tile-left">
+                <img ng-src="{{users[story.ref_user].profile.file.url}}" class="thumbnail img-circle">
+            </div>
+            <div class="md-tile-content">
+              <span class="pull-right">
+                <md-button class="md-raised md-warn" ng-if="story.ref_user == user.uid" ng-click="removeStoryConfirm($event,story)">삭제</md-button>
+                <!-- <i class="fa fa-times-circle red" ng-if="story.ref_user == user.uid" ng-click="removeStory(story)"></i> -->
+              </span>
+              <h3>{{users[story.ref_user].profile.name}}</h3>
+              <h4><span class="text-muted text-small"><em>{{story.fromNow}} 수정</em></span></h4>
+            </div>
+          </md-item-content>
+        </md-item>
+      </md-list>
+
+      <!-- detail -->
+      <p>
+        {{story.text}}</span>
+      </p>
+      
+      <img ng-src="{{hostUrl + story.file.url}}" class="img-center" ng-if="story.file"/>
+      <md-divider></md-divider>
+
+      <!-- comments -->
+      <md-list>
+        <md-item ng-repeat="(commentKey, comment) in commentsObject[storyKey]">
+          <md-item-content>
+            <div class="md-tile-left">
+                <img ng-src="{{users[comment.ref_user].profile.file.url}}" class="thumbnail img-circle">
+            </div>
+            <div class="md-tile-content">
+              <h4>
+              	{{users[comment.ref_user].profile.name}} - 
+              	<span class="text-muted text-small"><em>{{comment.fromNow}}</em></span>
+              	<i class="fa fa-times-circle red" ng-if="comment.ref_user == user.uid" ng-click="deleteCommentConfirm($event,story.$id, commentKey)"></i>
+              </h4>
+              <p>{{comment.body}}</p>
+            </div>
+          </md-item-content>
+        </md-item>
+        <md-item>
+          <md-item-content md-theme="green">
+            <div class="md-tile-left">
+                <img ng-src="{{users[user.uid].profile.file.url}}" class="thumbnail img-circle">
+            </div>
+            <div class="md-tile-content">
+              <md-text-float label="댓글을 입력하세요.." ng-model="newComment.body" class="long"> </md-text-float>
+              <md-button type="submit" ng-click="addComment(story.$id,newComment)" class="md-primary md-raised"><i class="fa fa-comment"></i> 댓글 저장</md-button>
+            </div>
+          </md-item-content>
+        </md-item>
+      </md-list>
+    </md-card>
+  </div>
+  <div ng-if="!memorial.public&&role.isGuest">
+    <div ng-include="'templates/block.html'"></div>
+  </div>
+</md-content>
+
+
+
+
+
+
+

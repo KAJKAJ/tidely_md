@@ -1,0 +1,45 @@
+<div ng-include="'templates/sidemenu_left.html'" ng-controller="SideMenuLeftCtrl"></div>
+<md-toolbar class="toolbar green-color-1">
+  <h3 class="md-toolbar-tools">
+    <span><i class="fa fa-align-justify" ng-click="openLeftMenu()"></i> 이야기</span>
+  </h3>
+</md-toolbar>
+
+<md-content class="toolbar-padding">
+  <div ng-if="memorial.public||!role.isGuest">
+    <ul class="vertical-timeline" ng-repeat="storyKey in storiesArray" id="{{storiesObject[storyKey].$id}}">
+      <li>
+        <div class="vertical-timeline-date text-small">{{storiesObject[storyKey].startDate|limitTo:4}}</div>
+        <div class="vertical-timeline-content">
+          <md-card ng-click="goToDetail(storiesObject[storyKey].$id)">
+            <md-list>
+              <md-item>
+                <md-item-content ng-if="storiesObject[storyKey].file">
+                  <div class="md-tile-left">
+                    <img ng-src="{{hostUrl + storiesObject[storyKey].file.url}}" class="thumbnail"/>
+                  </div>
+                  <div class="md-tile-content">
+                    <h3 ng-if="storiesObject[storyKey].text.headline">{{storiesObject[storyKey].text.headline|limitTo:30}}<span ng-if="storiesObject[storyKey].text.headline.length>20">..</span></h3>
+                    <h3 ng-if="!storiesObject[storyKey].text.headline">{{storiesObject[storyKey].text.text|limitTo:30}}<span ng-if="storiesObject[storyKey].text.text.length>20">..</span></h3>
+                  </div>
+                </md-item-content>
+                <md-item-content ng-if="!storiesObject[storyKey].file">
+                  <h3 ng-if="storiesObject[storyKey].text.headline">{{storiesObject[storyKey].text.headline|limitTo:30}}<span ng-if="storiesObject[storyKey].text.headline.length>20">...</span></h3>
+                  <h3 ng-if="!storiesObject[storyKey].text.headline">{{storiesObject[storyKey].text.text|limitTo:30}}<span ng-if="storiesObject[storyKey].text.text.length>20">..</span></h3>
+                </md-item-content>
+                <span class="text-muted text-small pull-left"><em>{{storiesObject[storyKey].startDate}}</em></span>
+                <span class="text-muted text-small pull-right"><em><i class="fa fa-comment"></i> {{objectSize(storiesObject[storyKey].comments)}}</em></span>
+                <br/>
+              </md-item>
+            </md-list>
+          </md-card>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div ng-if="!memorial.public&&role.isGuest">
+    <div ng-include="'templates/block.html'"></div>
+  </div>
+</md-content>
+
+

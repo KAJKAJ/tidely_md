@@ -1,0 +1,55 @@
+<md-toolbar class="toolbar green-color-1">
+  <h3 class="md-toolbar-tools">
+    <span>
+    	<i class="fa fa-chevron-left" ui-sref="letter"></i> 
+    	<span> 편지 쓰기</span>
+    </span>
+  </h3>
+</md-toolbar>
+
+<md-content class="toolbar-padding" md-theme="green">
+  <div ng-if="memorial.public||!role.isGuest">
+
+    <form name="newStoryForm" novalidate style="padding: 20px;" md-theme="green">
+      <textarea class="custom-textarea" ng-model="newStory.text" placeholder="전하고 싶은 이야기.." rows="10" style="resize: none;" ng-required="true"></textarea>
+      <br/><br/><br/>
+     
+      <div ng-show="fileUploading" layout="row" layout-sm="column" layout-align="space-around center">
+	      <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+	    </div>
+
+      <div ng-if="fileAdded">
+      	<img ng-src="{{hostUrl + newStory.file.url}}" class="img-center img-responsive"> 
+      	<br/>
+      </div>
+      
+      <div layout="row" layout-align="space-around center" md-theme="default">
+			  <div>
+			  	<md-button class="md-raised md-primary" style="width:150px" ng-click="addPhoto('CAMERA')" ng-disabled="fileUploading||uploading">사진 촬영</md-button>
+			  </div>
+			  <div>
+			  	<md-button class="md-raised md-primary" style="width:150px" ng-click="addPhoto('GALLERY')" ng-disabled="fileUploading||uploading">갤러리 업로드</md-button>
+			  </div>
+			</div>
+			<br/><br/><br/>
+
+			<div layout="row" layout-align="space-around center">
+			  <div>
+			  	<md-button class="md-raised md-primary" style="width:150px" ng-click="createNewStory(newStoryForm)" ng-disabled="fileUploading||newStoryForm.$invalid||uploading">
+			  		편지 보내기
+			  	</md-button>
+			  </div>
+			</div>
+    </form>
+  </div>
+  <div ng-if="!memorial.public&&role.isGuest">
+    <div ng-include="'templates/block.html'"></div>
+  </div>
+</md-content>
+
+
+
+
+
+
+
