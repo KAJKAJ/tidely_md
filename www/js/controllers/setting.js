@@ -18,7 +18,7 @@ angular
 
   $scope.memorial = Memorial.getCurrentMemorial();
   $scope.user = User.getCurrentUser();
-
+  
   $scope.copyMemorial = {};
   $scope.role = Memorial.getRole();
 

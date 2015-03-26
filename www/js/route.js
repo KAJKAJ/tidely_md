@@ -89,7 +89,8 @@ angular.module('doresolApp')
     .state('setting', {
       url: '/setting',
       templateUrl: 'templates/setting.html',
-      controller: 'SettingCtrl'
+      controller: 'SettingCtrl',
+      authenticate: true
     })
     .state('change_passwd', {
       url: '/change_passwd',
