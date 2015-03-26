@@ -10,17 +10,41 @@
     <img ng-src="{{hostUrl + memorial.file.url}}" class="img-center"></img>
     <h2> {{memorial.name}} </h2>
     <md-list>
+      <md-subheader class="profile-list-subheader">기본 정보</md-subheader>
       <md-item>
         <md-item-content>
-          <div class="md-tile-left">
-              <i class="fa fa-2x fa-calendar"></i>
+          <div class="md-tile-left profile-list-left">
+            생일
           </div>
           <div class="md-tile-content">
-            <h3>이야기 시작하는 날</h3>
-            <h4>{{memorial.dateOfBirth}} </h4>
+            {{memorial.dateOfBirth}}
           </div>
         </md-item-content>
         <md-item-content>
+          <div class="md-tile-left profile-list-left">
+            혈액형
+          </div>
+          <div class="md-tile-content">
+            {{memorial.bloodType}}
+          </div>
+        </md-item-content>
+        <md-item-content>
+          <div class="md-tile-left profile-list-left">
+            신장
+          </div>
+          <div class="md-tile-content">
+            {{memorial.height}} kg
+          </div>
+        </md-item-content>
+        <md-item-content>
+          <div class="md-tile-left profile-list-left">
+            몸무게
+          </div>
+          <div class="md-tile-content">
+            {{memorial.weight}} cm
+          </div>
+        </md-item-content>
+        <!-- <md-item-content>
           <div class="md-tile-left">
               <i class="fa fa-2x fa-calendar-o"></i>
           </div>
@@ -28,16 +52,58 @@
             <h3>이야기 끝나는 날</h3>
             <h3>{{memorial.dateOfDeath}}</h3>
           </div>
-        </md-item-content>
+        </md-item-content> -->
         <md-item-content>
-          <div class="md-tile-left">
-              <i class="fa fa-2x fa-pencil-square-o"></i>
+          <div class="md-tile-left profile-list-left">
+            소개글
           </div>
           <div class="md-tile-content">
-            <h3>{{memorial.description}}</h3>
+            {{memorial.description}}
           </div>
         </md-item-content>
       </md-item>
+      <!-- <md-subheader>결혼</md-subheader>
+      <md-item>
+        <md-item-content>
+          <div class="md-tile-left">
+            <h3>날짜</h3>
+          </div>
+          <div class="md-tile-content">
+            <h3>{{memorial.wedding.dateOfWedding|limitTo:10}} </h3>
+          </div>
+        </md-item-content>
+      </md-item> -->
+
+      <span ng-if="memorial.school">
+        <md-subheader class="profile-list-subheader">학교</md-subheader>
+        <md-item>
+          <md-item-content ng-repeat="school in memorial.school">
+            <div class="md-tile-left profile-list-left">
+              {{school.name}}
+            </div>
+            <div class="md-tile-content">
+              {{school.from}} - {{school.end}}
+              <br/>{{school.description}}
+            </div>
+          </md-item-content>
+        </md-item>
+      </span>
+
+      <span ng-if="memorial.work">
+        <md-subheader class="profile-list-subheader">직장</md-subheader>
+        <md-item>
+          <md-item-content ng-repeat="work in memorial.work">
+            <div class="md-tile-left profile-list-left">
+              {{work.name}}
+            </div>
+            <div class="md-tile-content">
+              {{work.from}} - {{work.end}}
+              <br/>{{work.description}}
+            </div>
+          </md-item-content>
+        </md-item>
+      </span>
+
     </md-list>
   </md-card>
   <div ng-if="!memorial.public&&role.isGuest">

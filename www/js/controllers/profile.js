@@ -16,6 +16,7 @@ angular
 
   $scope.copyMemorial = {};
   $scope.role = Memorial.getRole();
+  // console.log($scope.memorial);
 
   $scope.openLeftMenu = function() {
     $mdSidenav('left').toggle();
